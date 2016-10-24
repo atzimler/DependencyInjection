@@ -23,11 +23,13 @@ namespace ATZ.DependencyInjection
             return sb.ToString();
         }
 
+        // TODO: This is Reflection.
         private static string GetContravariantInterfaceName(Type interfaceType, Type interfaceArgument)
         {
             return $"{GetInterfaceName(interfaceType)}{{in {interfaceArgument.Name}}}";
         }
 
+        // TODO: This is Reflection.
         private static string GetInterfaceName(Type interfaceType)
         {
             return interfaceType.Name.Replace("`1", "");
