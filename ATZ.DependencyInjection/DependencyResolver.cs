@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ATZ.Reflection;
 using Ninject;
@@ -23,9 +24,13 @@ namespace ATZ.DependencyInjection
         public static T GetInterface<T>(this IKernel kernel, Type interfaceType, Type interfaceArgument)
             where T : class
         {
+            var activation = new Stack<Type>();
+
             var templateType = interfaceArgument;
             while (templateType != null)
             {
+                activation.Push(templateType);
+
                 var closedTemplateType = interfaceType.CloseTemplate(new[]{templateType});
                 var bindings = kernel.GetBindings(closedTemplateType);
                 // ReSharper disable PossibleMultipleEnumeration => bindings.Any should return if there is any element, so it will not enumerate the bindings,
@@ -43,7 +48,7 @@ namespace ATZ.DependencyInjection
                 templateType = templateType.BaseType;
             }
 
-            return null;
+            throw ActivationExceptionExtensions.Create(interfaceType, interfaceArgument, activation);
         }
     }
 }
