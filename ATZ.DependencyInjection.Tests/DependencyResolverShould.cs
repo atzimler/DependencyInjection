@@ -139,6 +139,8 @@ Suggestions:
                         interfaceType, typeof(DerivedClass)));
         }
 
+        // TODO: It should even throw an exception for INonContravariantInterface<DerivedClass> if INonContravariantInterface<BaseClass> exists.
+
         [Test]
         public void ThrowActivationExceptionForNonContravariantInterfaceWithProperMessage()
         {
