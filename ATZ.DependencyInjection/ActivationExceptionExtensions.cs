@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Ninject;
+using ATZ.Reflection;
 
 namespace ATZ.DependencyInjection
 {
@@ -16,33 +17,21 @@ namespace ATZ.DependencyInjection
             {
                 var activationType = activation.Pop();
                 sb.AppendLine(
-                    $"  {counter++}) Looking for bindings of {GetContravariantInterfaceName(interfaceType, activationType)}, found none.");
+                    $"  {counter++}) Looking for bindings of {interfaceType.ParameterizedGenericName(activationType)}, found none.");
             }
-            sb.AppendLine($"  {counter}) Request for {GetContravariantInterfaceName(interfaceType, activation.Pop())}, no bindings found.");
+            sb.AppendLine($"  {counter}) Request for {interfaceType.ParameterizedGenericName(activation.Pop())}, no bindings found.");
 
             return sb.ToString();
         }
 
-        // TODO: This is Reflection.
-        private static string GetContravariantInterfaceName(Type interfaceType, Type interfaceArgument)
-        {
-            return $"{GetInterfaceName(interfaceType)}{{in {interfaceArgument.Name}}}";
-        }
-
-        // TODO: This is Reflection.
-        private static string GetInterfaceName(Type interfaceType)
-        {
-            return interfaceType.Name.Replace("`1", "");
-        }
-
         internal static ActivationException Create(Type interfaceType, Type interfaceArgument, Stack<Type> activation)
         {
-            return new ActivationException($@"Error activating {GetContravariantInterfaceName(interfaceType, interfaceArgument)}
+            return new ActivationException($@"Error activating {interfaceType.ParameterizedGenericName(interfaceArgument)}
 No matching contravariant bindings are available, and the type is not self-bindable.
 Activation path:
 {GetActivationPath(interfaceType, activation)}
 Suggestions:
-  1) Ensure that you have defined a contravariant binding for {GetInterfaceName(interfaceType)} with type parameter of {interfaceArgument.Name} or one of its base class.
+  1) Ensure that you have defined a contravariant binding for {interfaceType.NonGenericName()} with type parameter of {interfaceArgument.Name} or one of its base class.
 ");
 
         }

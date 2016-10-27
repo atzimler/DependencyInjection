@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ATZ.Reflection, Version=1.0.6137.13201, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ATZ.Reflection.1.0.6137.13201\lib\net452\ATZ.Reflection.dll</HintPath>
+    <Reference Include="ATZ.Reflection, Version=1.0.6145.12612, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ATZ.Reflection.1.0.6145.12612\lib\net452\ATZ.Reflection.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">

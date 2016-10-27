@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using ATZ.Reflection;
 using Ninject;
 using Ninject.Planning.Bindings;
@@ -16,6 +17,18 @@ namespace ATZ.DependencyInjection
             Initialize();
         }
 
+        private static Type ApplyContravarianceToTemplateArgument(Type templateType, Type templateArgument)
+        {
+            var genericTypeParameters = templateType.GetTypeInfo().GenericTypeParameters;
+            if (genericTypeParameters[0].GetTypeInfo().GenericParameterAttributes ==
+                GenericParameterAttributes.Contravariant)
+            {
+                return templateArgument.BaseType;
+            }
+
+            return null;
+        }
+
         public static void Initialize()
         {
             Instance = new StandardKernel();
@@ -26,18 +39,18 @@ namespace ATZ.DependencyInjection
         {
             var activation = new Stack<Type>();
 
-            var templateType = interfaceArgument;
-            while (templateType != null)
+            var templateArgument = interfaceArgument;
+            while (templateArgument != null)
             {
-                activation.Push(templateType);
+                activation.Push(templateArgument);
 
-                var closedTemplateType = interfaceType.CloseTemplate(new[]{templateType});
+                var closedTemplateType = interfaceType.CloseTemplate(new[]{templateArgument});
                 var bindings = kernel.GetBindings(closedTemplateType);
                 // ReSharper disable PossibleMultipleEnumeration => bindings.Any should return if there is any element, so it will not enumerate the bindings,
                 // and bindings.ToList() will enumerate only it, when registration of the newly found bindings should occurs. => no multiple enumeration of sequence.
                 if (bindings.Any())
                 {
-                    if (templateType != interfaceArgument)
+                    if (templateArgument != interfaceArgument)
                     {
                         bindings.ToList().ConvertAll(b => new Binding(interfaceType, b.BindingConfiguration)).ForEach(kernel.AddBinding);
                     }
@@ -45,7 +58,7 @@ namespace ATZ.DependencyInjection
                 }
                 // ReSharper restore PossibleMultipleEnumeration
 
-                templateType = templateType.BaseType;
+                templateArgument = ApplyContravarianceToTemplateArgument(interfaceType, templateArgument);
             }
 
             throw ActivationExceptionExtensions.Create(interfaceType, interfaceArgument, activation);

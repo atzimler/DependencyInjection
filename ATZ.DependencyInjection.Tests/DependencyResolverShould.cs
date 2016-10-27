@@ -126,6 +126,40 @@ Suggestions:
             }
         }
 
-        // TODO: Check what if generic interface type parameter is not marked as contravariant.
+        [Test]
+        public void ThrowAnExceptionIfInterfaceWithArgumentDoesNotExistAndTheInterfaceIsNonContravariantEvenIfInterfaceIsRegisteredForTheArgumentBaseClass()
+        {
+            var baseClassInterface = new Template<BaseClass>();
+            DependencyResolver.Instance.Bind<INonContravariantInterface<BaseClass>>().ToConstant(baseClassInterface);
+
+            var interfaceType = typeof(INonContravariantInterface<>);
+            Assert.Throws<ActivationException>(
+                () =>
+                    DependencyResolver.Instance.GetInterface<INonContravariantInterface<DerivedClass>>(
+                        interfaceType, typeof(DerivedClass)));
+        }
+
+        [Test]
+        public void ThrowActivationExceptionForNonContravariantInterfaceWithProperMessage()
+        {
+            try
+            {
+                DependencyResolver.Instance.GetInterface<INonContravariantInterface<BaseClass>>(typeof(INonContravariantInterface<>), typeof(BaseClass));
+                Assert.Fail("ActivationException not thrown.");
+            }
+            catch (ActivationException ex)
+            {
+                Assert.AreEqual(@"Error activating INonContravariantInterface{BaseClass}
+No matching contravariant bindings are available, and the type is not self-bindable.
+Activation path:
+  1) Request for INonContravariantInterface{BaseClass}, no bindings found.
+
+Suggestions:
+  1) Ensure that you have defined a contravariant binding for INonContravariantInterface with type parameter of BaseClass or one of its base class.
+", ex.Message);
+            }
+        }
+
+        // TODO: What if interface requires two type parameters.
     }
 }

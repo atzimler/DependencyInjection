@@ -1,6 +1,6 @@
 ﻿namespace ATZ.DependencyInjection.Tests
 {
-    public class Template<T> : IInterface<T>
+    public class Template<T> : IInterface<T>, INonContravariantInterface<T>
     {
     }
 }
