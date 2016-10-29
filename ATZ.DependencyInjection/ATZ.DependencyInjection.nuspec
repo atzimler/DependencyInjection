@@ -6,8 +6,9 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-
+    
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <licenseUrl>https://raw.githubusercontent.com/atzimler/DependencyInjection/master/LICENSE.txt</licenseUrl>
     <description>DependencyResolver static class for holding the IKernel instance of Ninject and providing additional useful features.</description>
     <dependencies>
       <dependency id="ATZ.Reflection" version="[1,2)" />
