@@ -37,6 +37,12 @@ namespace ATZ.DependencyInjection
         public static T GetInterface<T>(this IKernel kernel, Type interfaceType, Type interfaceArgument)
             where T : class
         {
+            if (interfaceType.GenericTypeParameterCount() > 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(interfaceType), $@"Error activating {interfaceType.NonGenericName()}.
+At the moment, multiple generic parameters are not supported by this method.");
+            }
+
             var activation = new Stack<Type>();
 
             var templateArgument = interfaceArgument;

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Ninject;
 using NUnit.Framework;
 
@@ -139,8 +140,6 @@ Suggestions:
                         interfaceType, typeof(DerivedClass)));
         }
 
-        // TODO: It should even throw an exception for INonContravariantInterface<DerivedClass> if INonContravariantInterface<BaseClass> exists.
-
         [Test]
         public void ThrowActivationExceptionForNonContravariantInterfaceWithProperMessage()
         {
@@ -162,6 +161,20 @@ Suggestions:
             }
         }
 
-        // TODO: What if interface requires two type parameters.
+        [Test]
+        public void NotSupportMultipleTemplateArgumentsAtTheMoment()
+        {
+            try
+            {
+                DependencyResolver.Instance.GetInterface<IMultiParameterInterface<BaseClass, BaseClass>>(typeof(IMultiParameterInterface<,>), typeof(BaseClass));
+                Assert.Fail("ArgumentOutOfRangeException not thrown.");
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Assert.AreEqual(@"Error activating IMultiParameterInterface.
+At the moment, multiple generic parameters are not supported by this method.
+Parameter name: interfaceType", ex.Message);
+            }
+        }
     }
 }
