@@ -7,9 +7,13 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
 
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>DependencyResolver static class for holding the IKernel instance of Ninject.</description>
-    <releaseNotes>Initial NuGet Packaging.</releaseNotes>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>DependencyResolver static class for holding the IKernel instance of Ninject and providing additional useful features.</description>
+    
+    <releaseNotes>
+- Initial NuGet Packaging.
+    </releaseNotes>
+    
     <copyright>Copyright 2015</copyright>
   </metadata>
 </package>
