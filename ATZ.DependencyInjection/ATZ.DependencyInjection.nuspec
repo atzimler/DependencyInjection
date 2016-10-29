@@ -9,6 +9,9 @@
 
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>DependencyResolver static class for holding the IKernel instance of Ninject and providing additional useful features.</description>
+    <dependencies>
+      <dependency id="ATZ.Reflection" version="[1,2)" />
+    </dependencies>
     
     <releaseNotes>
 - Initial NuGet Packaging.
