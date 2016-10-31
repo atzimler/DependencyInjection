@@ -15,6 +15,10 @@
     </dependencies>
     
     <releaseNotes>
+1.1:
+- Added DependencyResolver.GetInterface(this IKernel, Type, Type) to support contravariant interface resolution without casting of the return type. This helps debug casting issues.
+
+1.0:
 - Initial NuGet Packaging.
     </releaseNotes>
     

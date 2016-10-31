@@ -34,8 +34,7 @@ namespace ATZ.DependencyInjection
             Instance = new StandardKernel();
         }
 
-        public static T GetInterface<T>(this IKernel kernel, Type interfaceType, Type interfaceArgument)
-            where T : class
+        public static object GetInterface(this IKernel kernel, Type interfaceType, Type interfaceArgument)
         {
             if (interfaceType.GenericTypeParameterCount() > 1)
             {
@@ -50,7 +49,7 @@ At the moment, multiple generic parameters are not supported by this method.");
             {
                 activation.Push(templateArgument);
 
-                var closedTemplateType = interfaceType.CloseTemplate(new[]{templateArgument});
+                var closedTemplateType = interfaceType.CloseTemplate(new[] { templateArgument });
                 var bindings = kernel.GetBindings(closedTemplateType);
                 // ReSharper disable PossibleMultipleEnumeration => bindings.Any should return if there is any element, so it will not enumerate the bindings,
                 // and bindings.ToList() will enumerate only it, when registration of the newly found bindings should occurs. => no multiple enumeration of sequence.
@@ -60,7 +59,7 @@ At the moment, multiple generic parameters are not supported by this method.");
                     {
                         bindings.ToList().ConvertAll(b => new Binding(interfaceType, b.BindingConfiguration)).ForEach(kernel.AddBinding);
                     }
-                    return kernel.Get(closedTemplateType) as T;
+                    return kernel.Get(closedTemplateType);
                 }
                 // ReSharper restore PossibleMultipleEnumeration
 
@@ -68,6 +67,12 @@ At the moment, multiple generic parameters are not supported by this method.");
             }
 
             throw ActivationExceptionExtensions.Create(interfaceType, interfaceArgument, activation);
+        }
+
+        public static T GetInterface<T>(this IKernel kernel, Type interfaceType, Type interfaceArgument)
+            where T : class
+        {
+            return GetInterface(kernel, interfaceType, interfaceArgument) as T;
         }
     }
 }

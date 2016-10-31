@@ -176,5 +176,16 @@ At the moment, multiple generic parameters are not supported by this method.
 Parameter name: interfaceType", ex.Message);
             }
         }
+
+        [Test]
+        public void AllowContravariantInterfaceResolutionWithoutTypeCastingToAllowDebuggingOfCastingProblems()
+        {
+            var baseClassInterface = new Template<BaseClass>();
+            DependencyResolver.Instance.Bind<IInterface<BaseClass>>().ToConstant(baseClassInterface);
+
+            var interfaceType = typeof(IInterface<>);
+            Assert.AreSame(baseClassInterface,
+                DependencyResolver.Instance.GetInterface(interfaceType, typeof(DerivedClass)));
+        }
     }
 }
