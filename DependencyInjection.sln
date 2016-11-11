@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATZ.DependencyInjection.Tests", "ATZ.DependencyInjection.Tests\ATZ.DependencyInjection.Tests.csproj", "{024C3405-73F5-4298-A108-4E45BE568315}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATZ.DependencyInjection.System", "ATZ.DependencyInjection.System\ATZ.DependencyInjection.System.csproj", "{681476D3-BBE2-46B4-978F-A6AF834C03D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{024C3405-73F5-4298-A108-4E45BE568315}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{024C3405-73F5-4298-A108-4E45BE568315}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{024C3405-73F5-4298-A108-4E45BE568315}.Release|Any CPU.Build.0 = Release|Any CPU
+		{681476D3-BBE2-46B4-978F-A6AF834C03D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{681476D3-BBE2-46B4-978F-A6AF834C03D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{681476D3-BBE2-46B4-978F-A6AF834C03D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{681476D3-BBE2-46B4-978F-A6AF834C03D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

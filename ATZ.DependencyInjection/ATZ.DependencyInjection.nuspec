@@ -15,6 +15,9 @@
     </dependencies>
     
     <releaseNotes>
+1.2.0:
+- Added SystemDebug and IDebug, so TDD method can be used to verify that certain messages has been placed into the debug message stack.
+      
 1.1.1:
 - Fixing missing documentation of public API.
 - Fixed a bug that allowed the previous singleton instance of the Ninject kernel on reinitialization to stay in the memory, causing memory leaks.
