@@ -8,6 +8,7 @@
     <owners>$author$</owners>
     
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <projectUrl>https://github.com/atzimler/DependencyInjection</projectUrl>
     <licenseUrl>https://raw.githubusercontent.com/atzimler/DependencyInjection/master/LICENSE.txt</licenseUrl>
     <description>DependencyResolver static class for holding the IKernel instance of Ninject and providing additional useful features.</description>
     <dependencies>
