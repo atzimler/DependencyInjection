@@ -12,10 +12,14 @@
     <licenseUrl>https://raw.githubusercontent.com/atzimler/DependencyInjection/master/LICENSE.txt</licenseUrl>
     <description>DependencyResolver static class for holding the IKernel instance of Ninject and providing additional useful features.</description>
     <dependencies>
-      <dependency id="ATZ.Reflection" version="[1,2)" />
+      <dependency id="ATZ.Reflection" version="[1.1,2)" />
     </dependencies>
     
     <releaseNotes>
+1.2.1:
+- As ATZ.Reflection.TypeExtensions introduced GenericTypeParameterCount in version 1.1 of the API the NuGet package should require at least that version,
+  since it is using it.
+      
 1.2.0:
 - Added SystemDebug and IDebug, so TDD method can be used to verify that certain messages has been placed into the debug message stack.
       
