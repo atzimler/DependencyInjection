@@ -187,5 +187,11 @@ Parameter name: interfaceType", ex.Message);
             Assert.AreSame(baseClassInterface,
                 DependencyResolver.Instance.GetInterface(interfaceType, typeof(DerivedClass)));
         }
+
+        [Test]
+        public void NonGenericInterfaceThrowsArgumentException()
+        {
+            Assert.Throws<ArgumentException>(() => DependencyResolver.Instance.GetInterface(typeof(INonGenericInterface), typeof(BaseClass)));
+        }
     }
 }

@@ -58,8 +58,8 @@ namespace ATZ.DependencyInjection
         /// <exception cref="ArgumentOutOfRangeException">The interfaceType has more than one generic parameter. Because contravariancy resolution
         /// complicates the situation if more than one parameter is used on the interface, it is currently not supported.</exception>
         /// <exception cref="ActivationException">The request cannot be fulfilled even when trying to apply contravariance.</exception>
+        /// <exception cref="ArgumentException">The interface parameter is non-generic.</exception>
         /// <remarks>This is the implementation of the GetInterface without type safety on the return value to allow debugging of binding problems.</remarks>
-        /// TODO: What if non generic interface queried here?
         public static object GetInterface(this IKernel kernel, Type interfaceType, Type interfaceArgument)
         {
             if (interfaceType.GenericTypeParameterCount() > 1)
@@ -109,6 +109,7 @@ At the moment, multiple generic parameters are not supported by this method.");
         /// <exception cref="ArgumentOutOfRangeException">The interfaceType has more than one generic parameter. Because contravariancy resolution
         /// complicates the situation if more than one parameter is used on the interface, it is currently not supported.</exception>
         /// <exception cref="ActivationException">The request cannot be fulfilled even when trying to apply contravariance.</exception>
+        /// <exception cref="ArgumentException">The interface parameter is non-generic.</exception>
         /// <remarks>Uses internally the non-typesafe version of GetInterface and returns the values in a type safe manner. When not debugging binding issues, this version of
         /// the method should be used as best practice.</remarks>
         public static T GetInterface<T>(this IKernel kernel, Type interfaceType, Type interfaceArgument)
