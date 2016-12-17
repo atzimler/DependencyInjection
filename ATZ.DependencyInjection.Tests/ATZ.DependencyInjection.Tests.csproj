@@ -75,6 +75,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyVersion.cs">
+      <Link>AssemblyVersion.cs</Link>
+    </Compile>
     <Compile Include="BaseClass.cs" />
     <Compile Include="DerivedClass.cs" />
     <Compile Include="DependencyResolverShould.cs" />
