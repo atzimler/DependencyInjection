@@ -16,6 +16,9 @@
     </dependencies>
     
     <releaseNotes>
+1.3.3:
+- Excluding unintentionally delivered DLLs from the NuGet package.
+
 1.3.2:
 - Fixing 4th version number to be the number of the build instead some time dependent number indicated by *, as in case of time dependency different target frameworks got different numbers.
 
@@ -49,7 +52,7 @@
   </metadata>
 
   <files>
-    <file src="bin\DebugNET45\*.*" target="lib\net45" />
-    <file src="bin\DebugNET452\*.*" target="lib\net452" />
+    <file src="bin\DebugNET45\ATZ.DependencyInjection*.*" target="lib\net45" />
+    <file src="bin\DebugNET452\ATZ.DependencyInjection*.*" target="lib\net452" />
   </files>
 </package>
