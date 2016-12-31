@@ -115,7 +115,8 @@ At the moment, multiple generic parameters are not supported by this method.");
         public static T GetInterface<T>(this IKernel kernel, Type interfaceType, Type interfaceArgument)
             where T : class
         {
-            return GetInterface(kernel, interfaceType, interfaceArgument) as T;
+            var obj = GetInterface(kernel, interfaceType, interfaceArgument);
+            return obj as T;
         }
     }
 }
