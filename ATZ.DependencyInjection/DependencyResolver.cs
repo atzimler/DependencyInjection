@@ -116,8 +116,11 @@ At the moment, multiple generic parameters are not supported by this method.");
             where T : class
         {
             var obj = GetInterface(kernel, interfaceType, interfaceArgument);
-
-            var targetType = typeof(T); // Temporary for reproducing the conditions of a bug.
+            var resolution = obj as T;
+            if (obj != null && resolution == null)
+            {
+                throw new ActivationException($"Activated object of type {interfaceType.ParameterizedGenericName(interfaceArgument)} cannot be casted to expected return type {typeof(T)}!");
+            }
 
             return obj as T;
         }

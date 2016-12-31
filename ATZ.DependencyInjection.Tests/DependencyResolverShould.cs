@@ -193,5 +193,15 @@ Parameter name: interfaceType", ex.Message);
         {
             Assert.Throws<ArgumentException>(() => DependencyResolver.Instance.GetInterface(typeof(INonGenericInterface), typeof(BaseClass)));
         }
+
+        [Test]
+        public void ThrowProperActivationExceptionWhenActivatedObjectCannotBeCastedToRequestedInterface()
+        {
+            var baseClassInterface = new Template<BaseClass>();
+            DependencyResolver.Instance.Bind<IInterface<BaseClass>>().ToConstant(baseClassInterface);
+
+            var ex = Assert.Throws<ActivationException>(() => DependencyResolver.Instance.GetInterface<IInterface<object>>(typeof(IInterface<>), typeof(BaseClass)));
+            Assert.AreEqual("Activated object of type IInterface{in BaseClass} cannot be casted to expected return type ATZ.DependencyInjection.Tests.IInterface`1[System.Object]!", ex.Message);
+        }
     }
 }
