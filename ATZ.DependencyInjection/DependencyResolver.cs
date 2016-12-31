@@ -122,7 +122,7 @@ At the moment, multiple generic parameters are not supported by this method.");
                 throw new ActivationException($"Activated object of type {interfaceType.ParameterizedGenericName(interfaceArgument)} cannot be casted to expected return type {typeof(T)}!");
             }
 
-            return obj as T;
+            return resolution;
         }
     }
 }
