@@ -116,6 +116,9 @@ At the moment, multiple generic parameters are not supported by this method.");
             where T : class
         {
             var obj = GetInterface(kernel, interfaceType, interfaceArgument);
+
+            var targetType = typeof(T); // Temporary for reproducing the conditions of a bug.
+
             return obj as T;
         }
     }
