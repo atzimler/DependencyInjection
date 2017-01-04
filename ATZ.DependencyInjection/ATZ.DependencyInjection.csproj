@@ -43,8 +43,8 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ATZ.Reflection, Version=2.0.0.55, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ATZ.Reflection.2.0.0.55\lib\net452\ATZ.Reflection.dll</HintPath>
+    <Reference Include="ATZ.Reflection, Version=2.1.0.56, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ATZ.Reflection.2.1.0.56\lib\net452\ATZ.Reflection.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="JetBrains.Annotations, Version=10.2.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">

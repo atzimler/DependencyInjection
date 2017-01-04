@@ -1,10 +1,11 @@
-﻿using System;
+﻿using ATZ.Reflection;
+using JetBrains.Annotations;
+using Ninject;
+using Ninject.Planning.Bindings;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using ATZ.Reflection;
-using Ninject;
-using Ninject.Planning.Bindings;
 
 namespace ATZ.DependencyInjection
 {
@@ -16,24 +17,61 @@ namespace ATZ.DependencyInjection
         /// <summary>
         /// The singleton instance of the Ninject kernel.
         /// </summary>
+        [NotNull]
         public static IKernel Instance { get; private set; }
 
+        // ReSharper disable once NotNullMemberIsNotInitialized => Yes, it is initialized in the calling chain.
         static DependencyResolver()
         {
             Initialize();
         }
 
-        private static Type ApplyContravarianceToTemplateArgument(Type templateType, Type templateArgument)
+        private static Type ApplyContravarianceToTemplateArgument([NotNull] Type templateType, [NotNull] Type templateArgument)
         {
-            var genericTypeParameters = templateType.GetTypeInfo().GenericTypeParameters;
-            if (genericTypeParameters[0].GetTypeInfo().GenericParameterAttributes ==
-                GenericParameterAttributes.Contravariant)
+            var genericTypeParameters = templateType.GetGenericTypeParameters();
+            if (genericTypeParameters.Length == 0 || genericTypeParameters[0] == null)
             {
-                return templateArgument.BaseType;
+                throw new ArgumentOutOfRangeException(nameof(templateType));
             }
 
-            return null;
+            var typeInfo = genericTypeParameters[0].GetTypeInfo();
+
+            // ReSharper disable once PossibleNullReferenceException => IntrospectionExtensions.GetTypeInfo() has
+            // no documented return possibility for null and it would not make sense to return null for a non-null type.
+            return typeInfo.GenericParameterAttributes == GenericParameterAttributes.Contravariant ? templateArgument.BaseType : null;
         }
+
+        private static object ResolveInterface([NotNull] IKernel kernel, [NotNull] Type interfaceType, [NotNull] Type interfaceArgument)
+        {
+            var activation = new Stack<Type>();
+
+            var templateArgument = interfaceArgument;
+            while (templateArgument != null)
+            {
+                activation.Push(templateArgument);
+
+                var closedTemplateType = interfaceType.CloseTemplate(new[] { templateArgument });
+                var bindings = kernel.GetBindings(closedTemplateType);
+                // ReSharper disable PossibleMultipleEnumeration => bindings.Any should return if there is any element, so it will not enumerate the bindings,
+                // and bindings.ToList() will enumerate only it, when registration of the newly found bindings should occurs. => no multiple enumeration of sequence.
+                if (bindings.Any())
+                {
+                    if (templateArgument != interfaceArgument)
+                    {
+                        bindings.ToList()
+                            .ConvertAll(b => new Binding(interfaceType, b.BindingConfiguration))
+                            .ForEach(kernel.AddBinding);
+                    }
+                    return kernel.Get(closedTemplateType);
+                }
+                // ReSharper restore PossibleMultipleEnumeration
+
+                templateArgument = ApplyContravarianceToTemplateArgument(interfaceType, templateArgument);
+            }
+
+            throw ActivationExceptionExtensions.Create(interfaceType, interfaceArgument, activation);
+        }
+
 
         /// <summary>
         /// Initialize (or reinitialize) the kernel.
@@ -55,6 +93,7 @@ namespace ATZ.DependencyInjection
         /// exact match can be found, the algorithms try to apply contravariancy to find proper interface type binding. If this resolution leads to
         /// success, the resolution is placed into the kernel for optimizing future response times.</param>
         /// <returns>The result of the type resolution.</returns>
+        /// <exception cref="ArgumentNullException">Either kernel or interfaceType or interfaceArgument parameter is null.</exception>
         /// <exception cref="ArgumentOutOfRangeException">The interfaceType has more than one generic parameter. Because contravariancy resolution
         /// complicates the situation if more than one parameter is used on the interface, it is currently not supported.</exception>
         /// <exception cref="ActivationException">The request cannot be fulfilled even when trying to apply contravariance.</exception>
@@ -62,39 +101,27 @@ namespace ATZ.DependencyInjection
         /// <remarks>This is the implementation of the GetInterface without type safety on the return value to allow debugging of binding problems.</remarks>
         public static object GetInterface(this IKernel kernel, Type interfaceType, Type interfaceArgument)
         {
+            if (kernel == null)
+            {
+                throw new ArgumentNullException(nameof(kernel));
+            }
+            if (interfaceType == null)
+            {
+                throw new ArgumentNullException(nameof(interfaceType));
+            }
+            if (interfaceArgument == null)
+            {
+                throw new ArgumentNullException(nameof(interfaceArgument));
+            }
+
             if (interfaceType.GenericTypeParameterCount() > 1)
             {
                 throw new ArgumentOutOfRangeException(nameof(interfaceType), $@"Error activating {interfaceType.NonGenericName()}.
 At the moment, multiple generic parameters are not supported by this method.");
             }
 
-            var activation = new Stack<Type>();
-
-            var templateArgument = interfaceArgument;
-            while (templateArgument != null)
-            {
-                activation.Push(templateArgument);
-
-                var closedTemplateType = interfaceType.CloseTemplate(new[] { templateArgument });
-                var bindings = kernel.GetBindings(closedTemplateType);
-                // ReSharper disable PossibleMultipleEnumeration => bindings.Any should return if there is any element, so it will not enumerate the bindings,
-                // and bindings.ToList() will enumerate only it, when registration of the newly found bindings should occurs. => no multiple enumeration of sequence.
-                if (bindings.Any())
-                {
-                    if (templateArgument != interfaceArgument)
-                    {
-                        bindings.ToList().ConvertAll(b => new Binding(interfaceType, b.BindingConfiguration)).ForEach(kernel.AddBinding);
-                    }
-                    return kernel.Get(closedTemplateType);
-                }
-                // ReSharper restore PossibleMultipleEnumeration
-
-                templateArgument = ApplyContravarianceToTemplateArgument(interfaceType, templateArgument);
-            }
-
-            throw ActivationExceptionExtensions.Create(interfaceType, interfaceArgument, activation);
+            return ResolveInterface(kernel, interfaceType, interfaceArgument);
         }
-
 
         /// <summary>
         /// Get an interface with the specified interface type for the interface argument type. If the interface contains contravariant type
@@ -106,6 +133,7 @@ At the moment, multiple generic parameters are not supported by this method.");
         /// exact match can be found, the algorithms try to apply contravariancy to find proper interface type binding. If this resolution leads to
         /// success, the resolution is placed into the kernel for optimizing future response times.</param>
         /// <returns>The result of the type resolution.</returns>
+        /// <exception cref="ArgumentNullException">interfaceType is null</exception>
         /// <exception cref="ArgumentOutOfRangeException">The interfaceType has more than one generic parameter. Because contravariancy resolution
         /// complicates the situation if more than one parameter is used on the interface, it is currently not supported.</exception>
         /// <exception cref="ActivationException">The request cannot be fulfilled even when trying to apply contravariance.</exception>
@@ -115,6 +143,11 @@ At the moment, multiple generic parameters are not supported by this method.");
         public static T GetInterface<T>(this IKernel kernel, Type interfaceType, Type interfaceArgument)
             where T : class
         {
+            if (interfaceType == null)
+            {
+                throw new ArgumentNullException(nameof(interfaceType));
+            }
+
             var obj = GetInterface(kernel, interfaceType, interfaceArgument);
             var resolution = obj as T;
             if (obj != null && resolution == null)

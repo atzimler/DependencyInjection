@@ -1,14 +1,15 @@
-﻿using System;
+﻿using ATZ.Reflection;
+using JetBrains.Annotations;
+using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using Ninject;
-using ATZ.Reflection;
 
 namespace ATZ.DependencyInjection
 {
     internal static class ActivationExceptionExtensions
     {
-        private static string GetActivationPath(Type interfaceType, Stack<Type> activation)
+        private static string GetActivationPath([NotNull] Type interfaceType, [NotNull] Stack<Type> activation)
         {
             var sb = new StringBuilder();
             var counter = 1;
@@ -24,7 +25,8 @@ namespace ATZ.DependencyInjection
             return sb.ToString();
         }
 
-        internal static ActivationException Create(Type interfaceType, Type interfaceArgument, Stack<Type> activation)
+        [NotNull]
+        internal static ActivationException Create([NotNull] Type interfaceType, [NotNull] Type interfaceArgument, [NotNull] Stack<Type> activation)
         {
             return new ActivationException($@"Error activating {interfaceType.ParameterizedGenericName(interfaceArgument)}
 No matching contravariant bindings are available, and the type is not self-bindable.

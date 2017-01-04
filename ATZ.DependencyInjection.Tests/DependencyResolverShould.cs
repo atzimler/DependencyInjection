@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq;
-using Ninject;
+﻿using Ninject;
 using NUnit.Framework;
+using System;
+using System.Linq;
 
 namespace ATZ.DependencyInjection.Tests
 {
@@ -201,6 +201,7 @@ Parameter name: interfaceType", ex.Message);
             DependencyResolver.Instance.Bind<IInterface<BaseClass>>().ToConstant(baseClassInterface);
 
             var ex = Assert.Throws<ActivationException>(() => DependencyResolver.Instance.GetInterface<IInterface<object>>(typeof(IInterface<>), typeof(BaseClass)));
+            Assert.IsNotNull(ex);
             Assert.AreEqual("Activated object of type IInterface{in BaseClass} cannot be casted to expected return type ATZ.DependencyInjection.Tests.IInterface`1[System.Object]!", ex.Message);
         }
     }
