@@ -20,10 +20,9 @@ namespace ATZ.DependencyInjection
         [NotNull]
         public static IKernel Instance { get; private set; }
 
-        // ReSharper disable once NotNullMemberIsNotInitialized => Yes, it is initialized in the calling chain.
         static DependencyResolver()
         {
-            Initialize();
+            Instance = new StandardKernel();
         }
 
         private static Type ApplyContravarianceToTemplateArgument([NotNull] Type templateType, [NotNull] Type templateArgument)
@@ -78,7 +77,7 @@ namespace ATZ.DependencyInjection
         /// </summary>
         public static void Initialize()
         {
-            Instance?.Dispose();
+            Instance.Dispose();
 
             Instance = new StandardKernel();
         }
