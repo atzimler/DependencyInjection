@@ -204,5 +204,58 @@ Parameter name: interfaceType", ex.Message);
             Assert.IsNotNull(ex);
             Assert.AreEqual("Activated object of type IInterface{in BaseClass} cannot be casted to expected return type ATZ.DependencyInjection.Tests.IInterface`1[System.Object]!", ex.Message);
         }
+
+        [Test]
+        public void GetInterfaceThrowsArgumentNullExceptionIfKernelIsNull()
+        {
+            var baseClassInterface = new Template<BaseClass>();
+            DependencyResolver.Instance.Bind<IInterface<BaseClass>>().ToConstant(baseClassInterface);
+
+            var ex =
+                Assert.Throws<ArgumentNullException>(
+                    () => DependencyResolver.GetInterface(null, typeof(IInterface<>), typeof(BaseClass)));
+            Assert.IsNotNull(ex);
+            Assert.AreEqual("kernel", ex.ParamName);
+        }
+
+        [Test]
+        public void GetInterfaceThrowsArgumentNullExceptionIfInterfaceTypeIsNull()
+        {
+            var baseClassInterface = new Template<BaseClass>();
+            DependencyResolver.Instance.Bind<IInterface<BaseClass>>().ToConstant(baseClassInterface);
+
+            var ex =
+                Assert.Throws<ArgumentNullException>(
+                    () => DependencyResolver.Instance.GetInterface(null, typeof(BaseClass)));
+            Assert.IsNotNull(ex);
+            Assert.AreEqual("interfaceType", ex.ParamName);
+        }
+
+        [Test]
+        public void GetInterfaceThrowsArgumentNullExceptionIfInterfaceArgumentIsNull()
+        {
+            var baseClassInterface = new Template<BaseClass>();
+            DependencyResolver.Instance.Bind<IInterface<BaseClass>>().ToConstant(baseClassInterface);
+
+            var ex =
+                Assert.Throws<ArgumentNullException>(
+                    () => DependencyResolver.Instance.GetInterface(typeof(IInterface<>), null));
+            Assert.IsNotNull(ex);
+            Assert.AreEqual("interfaceArgument", ex.ParamName);
+        }
+
+        [Test]
+        public void GetInterfaceTemplateThrowsArgumentNullExceptionIfInterfaceTypeIsNull()
+        {
+            var baseClassInterface = new Template<BaseClass>();
+            DependencyResolver.Instance.Bind<IInterface<BaseClass>>().ToConstant(baseClassInterface);
+
+            var ex =
+                Assert.Throws<ArgumentNullException>(
+                    () => DependencyResolver.Instance.GetInterface<Template<BaseClass>>(null, typeof(BaseClass)));
+            Assert.IsNotNull(ex);
+            Assert.AreEqual("interfaceType", ex.ParamName);
+        }
+
     }
 }
