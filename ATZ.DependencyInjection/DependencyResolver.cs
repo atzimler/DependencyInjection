@@ -5,7 +5,6 @@ using Ninject.Planning.Bindings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace ATZ.DependencyInjection
 {
@@ -33,11 +32,7 @@ namespace ATZ.DependencyInjection
                 throw new ArgumentOutOfRangeException(nameof(templateType));
             }
 
-            var typeInfo = genericTypeParameters[0].GetTypeInfo();
-
-            // ReSharper disable once PossibleNullReferenceException => IntrospectionExtensions.GetTypeInfo() has
-            // no documented return possibility for null and it would not make sense to return null for a non-null type.
-            return typeInfo.GenericParameterAttributes == GenericParameterAttributes.Contravariant ? templateArgument.BaseType : null;
+            return genericTypeParameters[0].IsContravariant() ? templateArgument.BaseType : null;
         }
 
         private static object ResolveInterface([NotNull] IKernel kernel, [NotNull] Type interfaceType, [NotNull] Type interfaceArgument)
@@ -57,9 +52,16 @@ namespace ATZ.DependencyInjection
                 {
                     if (templateArgument != interfaceArgument)
                     {
-                        bindings.ToList()
-                            .ConvertAll(b => new Binding(interfaceType, b.BindingConfiguration))
-                            .ForEach(kernel.AddBinding);
+                        bindings
+                            .ToList()
+                            .ForEach(
+                                b =>
+                                {
+                                    if (b != null)
+                                    {
+                                        kernel.AddBinding(new Binding(interfaceType, b.BindingConfiguration));
+                                    }
+                                });
                     }
                     return kernel.Get(closedTemplateType);
                 }
