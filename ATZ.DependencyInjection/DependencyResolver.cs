@@ -24,19 +24,22 @@ namespace ATZ.DependencyInjection
             Instance = new StandardKernel();
         }
 
-        private static Type ApplyContravarianceToTemplateArgument([NotNull] Type templateType, [NotNull] Type templateArgument)
+        private static bool IsContravariantTemplate([NotNull] Type interfaceType)
         {
-            var genericTypeParameters = templateType.GetGenericTypeParameters();
+            var genericTypeParameters = interfaceType.GetGenericTypeParameters();
             if (genericTypeParameters.Length == 0 || genericTypeParameters[0] == null)
             {
-                throw new ArgumentOutOfRangeException(nameof(templateType));
+                throw new ArgumentOutOfRangeException(nameof(interfaceType));
             }
-
-            return genericTypeParameters[0].IsContravariant() ? templateArgument.BaseType : null;
+            var isContravariantTemplate = genericTypeParameters[0].IsContravariant();
+            return isContravariantTemplate;
         }
+
 
         private static object ResolveInterface([NotNull] IKernel kernel, [NotNull] Type interfaceType, [NotNull] Type interfaceArgument)
         {
+            var isContravariantTemplate = IsContravariantTemplate(interfaceType);
+
             var activation = new Stack<Type>();
 
             var templateArgument = interfaceArgument;
@@ -67,12 +70,11 @@ namespace ATZ.DependencyInjection
                 }
                 // ReSharper restore PossibleMultipleEnumeration
 
-                templateArgument = ApplyContravarianceToTemplateArgument(interfaceType, templateArgument);
+                templateArgument = isContravariantTemplate ? templateArgument.BaseType : null;
             }
 
             throw ActivationExceptionExtensions.Create(interfaceType, interfaceArgument, activation);
         }
-
 
         /// <summary>
         /// Initialize (or reinitialize) the kernel.
@@ -95,10 +97,9 @@ namespace ATZ.DependencyInjection
         /// success, the resolution is placed into the kernel for optimizing future response times.</param>
         /// <returns>The result of the type resolution.</returns>
         /// <exception cref="ArgumentNullException">Either kernel or interfaceType or interfaceArgument parameter is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The interfaceType has more than one generic parameter. Because contravariancy resolution
+        /// <exception cref="ArgumentOutOfRangeException">The interfaceType has more than one generic parameter or is non-generic. Because contravariancy resolution
         /// complicates the situation if more than one parameter is used on the interface, it is currently not supported.</exception>
         /// <exception cref="ActivationException">The request cannot be fulfilled even when trying to apply contravariance.</exception>
-        /// <exception cref="ArgumentException">The interface parameter is non-generic.</exception>
         /// <remarks>This is the implementation of the GetInterface without type safety on the return value to allow debugging of binding problems.</remarks>
         public static object GetInterface(this IKernel kernel, Type interfaceType, Type interfaceArgument)
         {
@@ -135,7 +136,7 @@ At the moment, multiple generic parameters are not supported by this method.");
         /// success, the resolution is placed into the kernel for optimizing future response times.</param>
         /// <returns>The result of the type resolution.</returns>
         /// <exception cref="ArgumentNullException">interfaceType is null</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The interfaceType has more than one generic parameter. Because contravariancy resolution
+        /// <exception cref="ArgumentOutOfRangeException">The interfaceType has more than one generic parameter or is non-generic. Because contravariancy resolution
         /// complicates the situation if more than one parameter is used on the interface, it is currently not supported.</exception>
         /// <exception cref="ActivationException">The request cannot be fulfilled even when trying to apply contravariance.</exception>
         /// <exception cref="ArgumentException">The interface parameter is non-generic.</exception>

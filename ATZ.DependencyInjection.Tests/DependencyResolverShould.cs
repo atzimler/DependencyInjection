@@ -39,13 +39,11 @@ namespace ATZ.DependencyInjection.Tests
         [Test]
         public void ContainNinjectStyleErrorMessageWhenThrowingActivationException()
         {
-            try
-            {
-                DependencyResolver.Instance.Get<IInterface<DerivedClass>>();
-            }
-            catch (ActivationException ex)
-            {
-                Assert.AreEqual(@"Error activating IInterface{DerivedClass}
+            var ex =
+                Assert.Throws<ActivationException>(() => DependencyResolver.Instance.Get<IInterface<DerivedClass>>());
+
+            Assert.IsNotNull(ex);
+            Assert.AreEqual(@"Error activating IInterface{DerivedClass}
 No matching bindings are available, and the type is not self-bindable.
 Activation path:
   1) Request for IInterface{DerivedClass}
@@ -57,7 +55,6 @@ Suggestions:
   4) If you are using constructor arguments, ensure that the parameter name matches the constructors parameter name.
   5) If you are using automatic module loading, ensure the search path and filters are correct.
 ", ex.Message);
-            }
         }
 
         [Test]
@@ -107,14 +104,10 @@ Suggestions:
         [Test]
         public void ThrowActivationExceptionForContravariantInterfaceWithProperMessage()
         {
-            try
-            {
-                DependencyResolver.Instance.GetInterface<IInterface<BaseClass>>(typeof(IInterface<>), typeof(DerivedClass));
-                Assert.Fail("ActivationException not thrown.");
-            }
-            catch (ActivationException ex)
-            {
-                Assert.AreEqual(@"Error activating IInterface{in DerivedClass}
+            var ex = Assert.Throws<ActivationException>(() => DependencyResolver.Instance.GetInterface<IInterface<BaseClass>>(typeof(IInterface<>), typeof(DerivedClass)));
+
+            Assert.IsNotNull(ex);
+            Assert.AreEqual(@"Error activating IInterface{in DerivedClass}
 No matching contravariant bindings are available, and the type is not self-bindable.
 Activation path:
   1) Looking for bindings of IInterface{in Object}, found none.
@@ -124,7 +117,6 @@ Activation path:
 Suggestions:
   1) Ensure that you have defined a contravariant binding for IInterface with type parameter of DerivedClass or one of its base class.
 ", ex.Message);
-            }
         }
 
         [Test]
@@ -143,14 +135,10 @@ Suggestions:
         [Test]
         public void ThrowActivationExceptionForNonContravariantInterfaceWithProperMessage()
         {
-            try
-            {
-                DependencyResolver.Instance.GetInterface<INonContravariantInterface<BaseClass>>(typeof(INonContravariantInterface<>), typeof(BaseClass));
-                Assert.Fail("ActivationException not thrown.");
-            }
-            catch (ActivationException ex)
-            {
-                Assert.AreEqual(@"Error activating INonContravariantInterface{BaseClass}
+            var ex = Assert.Throws<ActivationException>(() => DependencyResolver.Instance.GetInterface<INonContravariantInterface<BaseClass>>(typeof(INonContravariantInterface<>), typeof(BaseClass)));
+
+            Assert.IsNotNull(ex);
+            Assert.AreEqual(@"Error activating INonContravariantInterface{BaseClass}
 No matching contravariant bindings are available, and the type is not self-bindable.
 Activation path:
   1) Request for INonContravariantInterface{BaseClass}, no bindings found.
@@ -158,23 +146,17 @@ Activation path:
 Suggestions:
   1) Ensure that you have defined a contravariant binding for INonContravariantInterface with type parameter of BaseClass or one of its base class.
 ", ex.Message);
-            }
         }
 
         [Test]
         public void NotSupportMultipleTemplateArgumentsAtTheMoment()
         {
-            try
-            {
-                DependencyResolver.Instance.GetInterface<IMultiParameterInterface<BaseClass, BaseClass>>(typeof(IMultiParameterInterface<,>), typeof(BaseClass));
-                Assert.Fail("ArgumentOutOfRangeException not thrown.");
-            }
-            catch (ArgumentOutOfRangeException ex)
-            {
-                Assert.AreEqual(@"Error activating IMultiParameterInterface.
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(() => DependencyResolver.Instance.GetInterface<IMultiParameterInterface<BaseClass, BaseClass>>(typeof(IMultiParameterInterface<,>), typeof(BaseClass)));
+
+            Assert.IsNotNull(ex);
+            Assert.AreEqual(@"Error activating IMultiParameterInterface.
 At the moment, multiple generic parameters are not supported by this method.
 Parameter name: interfaceType", ex.Message);
-            }
         }
 
         [Test]
@@ -191,7 +173,9 @@ Parameter name: interfaceType", ex.Message);
         [Test]
         public void NonGenericInterfaceThrowsArgumentException()
         {
-            Assert.Throws<ArgumentException>(() => DependencyResolver.Instance.GetInterface(typeof(INonGenericInterface), typeof(BaseClass)));
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(() => DependencyResolver.Instance.GetInterface(typeof(INonGenericInterface), typeof(BaseClass)));
+            Assert.IsNotNull(ex);
+            Assert.AreEqual("interfaceType", ex.ParamName);
         }
 
         [Test]
