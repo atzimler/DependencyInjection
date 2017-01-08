@@ -16,7 +16,10 @@
     </dependencies>
     
     <releaseNotes>
-2.2.0:
+2.0.1:
+- Fixing problem with installation of the ATZ.DependencyInjection.System module.
+      
+2.0.0:
 - For when trying to get contravariant interface for a non-generic interface, now ArgumentOutOfRange exception is shown instead of ArgumentException.
 - Eliminating possibilities for null reference exceptions and adding annotations for ReSharper.
 
