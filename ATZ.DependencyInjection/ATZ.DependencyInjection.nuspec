@@ -16,6 +16,9 @@
     </dependencies>
     
     <releaseNotes>
+2.1.0:
+- Retaining JetBrains.Annotations symbols on the API.
+      
 2.0.1:
 - Fixing problem with installation of the ATZ.DependencyInjection.System module.
       
