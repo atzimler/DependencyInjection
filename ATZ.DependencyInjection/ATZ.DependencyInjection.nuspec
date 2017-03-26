@@ -16,6 +16,10 @@
     </dependencies>
     
     <releaseNotes>
+2.2.0:
+- Introducing ATZ.DependencyInjection.System.Windows.
+- Adding ATZ.DependencyInjection.System.Windows.IMessageBox
+      
 2.1.0:
 - Retaining JetBrains.Annotations symbols on the API.
       

@@ -1,19 +1,19 @@
-﻿namespace ATZ.DependencyInjection.System
+﻿namespace ATZ.DependencyInjection.System.Windows
 {
     /// <summary>
-    /// Bindings for the ATZ.DependencyInjection.System namespace.
+    /// Bindings for the ATZ.DependencyInjection.System.Windows namespace.
     /// </summary>
     // ReSharper disable once UnusedMember.Global => Part of public API.
     public static class Bindings
     {
         /// <summary>
-        /// Initialize Bindings for the interfaces and their implementation in the ATZ.DependencyInjection.System
+        /// Initialize Bindings for the interfaces and their implementation in the ATZ.DependencyInjection.System.Windows
         /// namespace.
         /// </summary>
         // ReSharper disable once UnusedMember.Global => Part of public API.
         public static void Initialize()
         {
-            DependencyResolver.Instance.Bind<IDebug>().ToConstant(new SystemDebug());
+            DependencyResolver.Instance.Bind<IMessageBox>().ToConstant(new SystemWindowsMessageBox());
         }
     }
 }

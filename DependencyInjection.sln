@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATZ.DependencyInjection", "ATZ.DependencyInjection\ATZ.DependencyInjection.csproj", "{C9B6752A-9521-4F18-A315-70B4FE8E8BB6}"
 EndProject
@@ -15,6 +15,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATZ.DependencyInjection.Tests", "ATZ.DependencyInjection.Tests\ATZ.DependencyInjection.Tests.csproj", "{024C3405-73F5-4298-A108-4E45BE568315}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATZ.DependencyInjection.System", "ATZ.DependencyInjection.System\ATZ.DependencyInjection.System.csproj", "{681476D3-BBE2-46B4-978F-A6AF834C03D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATZ.DependencyInjection.System.Windows", "ATZ.DependencyInjection.System.Windows\ATZ.DependencyInjection.System.Windows.csproj", "{C9442B98-6077-4066-A102-74E37110433A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +50,14 @@ Global
 		{681476D3-BBE2-46B4-978F-A6AF834C03D6}.DebugNET452|Any CPU.Build.0 = DebugNET452|Any CPU
 		{681476D3-BBE2-46B4-978F-A6AF834C03D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{681476D3-BBE2-46B4-978F-A6AF834C03D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9442B98-6077-4066-A102-74E37110433A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9442B98-6077-4066-A102-74E37110433A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9442B98-6077-4066-A102-74E37110433A}.DebugNET45|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9442B98-6077-4066-A102-74E37110433A}.DebugNET45|Any CPU.Build.0 = Debug|Any CPU
+		{C9442B98-6077-4066-A102-74E37110433A}.DebugNET452|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9442B98-6077-4066-A102-74E37110433A}.DebugNET452|Any CPU.Build.0 = Debug|Any CPU
+		{C9442B98-6077-4066-A102-74E37110433A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9442B98-6077-4066-A102-74E37110433A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
