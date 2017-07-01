@@ -11,7 +11,7 @@ namespace ATZ.DependencyInjection.Tests
         [SetUp]
         public void SetUp()
         {
-            DependencyResolver.Initialize();
+            DependencyResolver.Initialize(new StandardKernel());
         }
 
         [Test]
@@ -24,7 +24,7 @@ namespace ATZ.DependencyInjection.Tests
         public void ProperlyInitialize()
         {
             var kernel = DependencyResolver.Instance;
-            DependencyResolver.Initialize();
+            DependencyResolver.Initialize(new StandardKernel());
             Assert.AreNotSame(kernel, DependencyResolver.Instance);
         }
 

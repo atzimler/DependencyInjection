@@ -85,11 +85,12 @@ namespace ATZ.DependencyInjection
         /// <summary>
         /// Initialize (or reinitialize) the kernel.
         /// </summary>
-        public static void Initialize()
+        public static void Initialize([NotNull] IKernel kernel)
         {
             Instance.Dispose();
 
-            Instance = new StandardKernel();
+            //Instance = new StandardKernel();
+            Instance = kernel;
         }
 
         /// <summary>
