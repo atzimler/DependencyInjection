@@ -51,6 +51,7 @@
     <Compile Include="IBindingToSyntax.cs" />
     <Compile Include="IBindingWhenInNamedWithOrOnSyntax.cs" />
     <Compile Include="IKernel.cs" />
+    <Compile Include="NullBindingToSyntax.cs" />
     <Compile Include="NullKernel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

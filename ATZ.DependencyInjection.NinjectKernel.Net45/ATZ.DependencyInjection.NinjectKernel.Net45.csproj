@@ -57,6 +57,7 @@
     </Compile>
     <Compile Include="NinjectBinding.cs" />
     <Compile Include="NinjectBindingConfiguration.cs" />
+    <Compile Include="NinjectBindingToSyntax.cs" />
     <Compile Include="NinjectStandardKernel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

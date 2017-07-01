@@ -4,14 +4,6 @@ using System.Linq;
 
 namespace ATZ.DependencyInjection
 {
-    public class NullBindingToSyntax<T> : IBindingToSyntax<T>
-    {
-        public IBindingWhenInNamedWithOrOnSyntax<TImplementation> ToConstant<TImplementation>(TImplementation value) where TImplementation : T
-        {
-            return new NullBindingWhenInNamedWithOrOnSyntax<TImplementation>();
-        }
-    }
-
     public class NullBindingWhenInNamedWithOrOnSyntax<T> : IBindingWhenInNamedWithOrOnSyntax<T>
     {
     }

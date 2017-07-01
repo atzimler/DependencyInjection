@@ -19,24 +19,6 @@ namespace ATZ.DependencyInjection.NinjectKernel.Net45
             BindingInNamedWithOrOnSyntax = bindingInNamedWithOrOnSyntax;
         }
     }
-
-    public class NinjectBindingToSyntax<T> : IBindingToSyntax<T>
-    {
-        [NotNull]
-        public Ninject.Syntax.IBindingToSyntax<T> BindingToSyntax { get; }
-
-        public NinjectBindingToSyntax([NotNull] Ninject.Syntax.IBindingToSyntax<T> bindingToSyntax)
-        {
-            BindingToSyntax = bindingToSyntax;
-        }
-
-        public IBindingWhenInNamedWithOrOnSyntax<TImplementation>
-            ToConstant<TImplementation>(TImplementation implementation) where TImplementation : T
-        {
-            return new NinjectBindingWhenInNamedWithOrOnSyntax<TImplementation>(
-                BindingToSyntax.ToConstant(implementation));
-        }
-    }
 }
 
 public class NinjectStandardKernel : IKernel
