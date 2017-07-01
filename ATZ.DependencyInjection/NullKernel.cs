@@ -1,50 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ATZ.DependencyInjection
 {
-    public class NullBindingWhenInNamedWithOrOnSyntax<T> : IBindingWhenInNamedWithOrOnSyntax<T>
-    {
-    }
-
     public class NullKernel : IKernel
     {
         public void AddBinding(Type type, IBindingConfiguration bindingConfiguration)
         {
+            throw new UnitializedKernelException();
         }
 
         public IBindingToSyntax<object> Bind(params Type[] services)
         {
-            return new NullBindingToSyntax<object>();
+            throw new UnitializedKernelException();
         }
 
         public IBindingToSyntax<T> Bind<T>()
         {
-            return new NullBindingToSyntax<T>();
+            throw new UnitializedKernelException();
         }
 
         public IEnumerable<IBinding> GetBindings(Type type)
         {
-            return Enumerable.Empty<IBinding>();
+            throw new UnitializedKernelException();
         }
 
         public object Get(Type type)
         {
-            return null;
+            throw new UnitializedKernelException();
         }
 
         public T Get<T>()
         {
-            return default(T);
+            throw new UnitializedKernelException();
         }
 
         public void Unbind<T>()
         {
+            throw new UnitializedKernelException();
         }
 
         public void Unbind(Type service)
         {
+            throw new UnitializedKernelException();
         }
     }
 }

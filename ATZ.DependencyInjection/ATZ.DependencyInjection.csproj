@@ -51,9 +51,9 @@
     <Compile Include="IBindingToSyntax.cs" />
     <Compile Include="IBindingWhenInNamedWithOrOnSyntax.cs" />
     <Compile Include="IKernel.cs" />
-    <Compile Include="NullBindingToSyntax.cs" />
     <Compile Include="NullKernel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitializedKernelException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="ATZ.Reflection, Version=3.1.0.74, Culture=neutral, processorArchitecture=MSIL">

@@ -12,7 +12,7 @@
     <licenseUrl>https://raw.githubusercontent.com/atzimler/DependencyInjection/master/LICENSE.txt</licenseUrl>
     <description>DependencyResolver static class for holding a dependency injection container and providing additional useful features.</description>
     <dependencies>
-      <dependency id="ATZ.Reflection" version="[3,4)" />
+      <dependency id="ATZ.Reflection" version="[3.1,4)" />
     </dependencies>
     
     <releaseNotes>
