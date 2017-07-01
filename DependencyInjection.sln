@@ -12,13 +12,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATZ.DependencyInjection.Tests", "ATZ.DependencyInjection.Tests\ATZ.DependencyInjection.Tests.csproj", "{024C3405-73F5-4298-A108-4E45BE568315}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATZ.DependencyInjection.System", "ATZ.DependencyInjection.System\ATZ.DependencyInjection.System.csproj", "{681476D3-BBE2-46B4-978F-A6AF834C03D6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATZ.DependencyInjection.System.Windows", "ATZ.DependencyInjection.System.Windows\ATZ.DependencyInjection.System.Windows.csproj", "{C9442B98-6077-4066-A102-74E37110433A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATZ.DependencyInjection", "ATZ.DependencyInjection\ATZ.DependencyInjection.csproj", "{3B648593-1298-4287-8AC5-77D627327985}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATZ.DependencyInjection.NinjectKernel.Net45", "ATZ.DependencyInjection.NinjectKernel.Net45\ATZ.DependencyInjection.NinjectKernel.Net45.csproj", "{5E5186D5-7354-4932-A568-401A64F0594E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATZ.DependencyInjection.System", "ATZ.DependencyInjection.System\ATZ.DependencyInjection.System.csproj", "{3D38D0D5-5C73-406A-8D65-2E33DF8EAC54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,10 +30,6 @@ Global
 		{024C3405-73F5-4298-A108-4E45BE568315}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{024C3405-73F5-4298-A108-4E45BE568315}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{024C3405-73F5-4298-A108-4E45BE568315}.Release|Any CPU.Build.0 = Release|Any CPU
-		{681476D3-BBE2-46B4-978F-A6AF834C03D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{681476D3-BBE2-46B4-978F-A6AF834C03D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{681476D3-BBE2-46B4-978F-A6AF834C03D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{681476D3-BBE2-46B4-978F-A6AF834C03D6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C9442B98-6077-4066-A102-74E37110433A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C9442B98-6077-4066-A102-74E37110433A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9442B98-6077-4066-A102-74E37110433A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -46,6 +42,10 @@ Global
 		{5E5186D5-7354-4932-A568-401A64F0594E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E5186D5-7354-4932-A568-401A64F0594E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E5186D5-7354-4932-A568-401A64F0594E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D38D0D5-5C73-406A-8D65-2E33DF8EAC54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D38D0D5-5C73-406A-8D65-2E33DF8EAC54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D38D0D5-5C73-406A-8D65-2E33DF8EAC54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D38D0D5-5C73-406A-8D65-2E33DF8EAC54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

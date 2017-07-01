@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace ATZ.DependencyInjection.System
+﻿namespace ATZ.DependencyInjection.System
 {
     /// <summary>
     /// Interface for replacing System.Diagnostics.Debug static object, so that its calls
@@ -11,9 +9,6 @@ namespace ATZ.DependencyInjection.System
         // ReSharper disable UnusedMember.Global => Part of public API.
         /// <see cref="Debug.WriteLine(object)"/>
         void WriteLine(object value);
-
-        /// <see cref="Debug.WriteLine(object, string)"/>
-        void WriteLine(object value, string category);
 
         /// <see cref="Debug.WriteLine(string)"/>
         void WriteLine(string message);

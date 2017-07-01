@@ -13,12 +13,6 @@ namespace ATZ.DependencyInjection.System
             Debug.WriteLine(value);
         }
 
-        /// <see cref="Debug.WriteLine(object, string)"/>
-        public void WriteLine(object value, string category)
-        {
-            Debug.WriteLine(value, category);
-        }
-
         /// <see cref="Debug.WriteLine(string)"/>
         public void WriteLine(string message)
         {
