@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <projectUrl>https://github.com/atzimler/DependencyInjection</projectUrl>
+    <licenseUrl>https://raw.githubusercontent.com/atzimler/DependencyInjection/master/LICENSE.txt</licenseUrl>
+    <description>ATZ.DependencyResolver.NinjectKernel.Net45 extension package for providing a Kernel implementation based on Ninject targeting .NET Framework 4.5.</description>
+    <dependencies>
+      <dependency id="ATZ.DependencyInjection" version="[3,4)" />
+    </dependencies>
+
+    <releaseNotes>
+3.0.0:
+- Initial NuGet Packaging.
+    </releaseNotes>
+
+    <copyright>Copyright 2017</copyright>
+  </metadata>
+
+  <files>
+    <file src="bin\Debug\ATZ.DependencyInjection.NinjectKernel.Net45*.*" target="lib\net45" />
+  </files>
+</package>
