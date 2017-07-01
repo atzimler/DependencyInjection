@@ -19,11 +19,6 @@ namespace ATZ.DependencyInjection
         [NotNull]
         public static IKernel Instance { get; private set; }
 
-        static DependencyResolver()
-        {
-            //Instance = new StandardKernel();
-        }
-
         private static void CacheResolutionIfNewlyResolved([NotNull] IKernel kernel, [NotNull] Type interfaceType,
             Type interfaceArgument, Type templateArgument, [NotNull] IEnumerable<IBinding> bindings)
         {
@@ -87,7 +82,7 @@ namespace ATZ.DependencyInjection
         /// </summary>
         public static void Initialize([NotNull] IKernel kernel)
         {
-            Instance.Dispose();
+            //Instance.Dispose();
 
             //Instance = new StandardKernel();
             Instance = kernel;
