@@ -2,7 +2,6 @@
 using JetBrains.Annotations;
 using Ninject;
 using Ninject.Planning.Bindings;
-using Ninject.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +24,7 @@ namespace ATZ.DependencyInjection
             Instance = new StandardKernel();
         }
 
-        private static void CacheResolutionIfNewlyResolved([NotNull] IBindingRoot kernel, [NotNull] Type interfaceType,
+        private static void CacheResolutionIfNewlyResolved([NotNull] IKernel kernel, [NotNull] Type interfaceType,
             Type interfaceArgument, Type templateArgument, [NotNull] IEnumerable<IBinding> bindings)
         {
             if (templateArgument == interfaceArgument)
