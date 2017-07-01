@@ -73,6 +73,7 @@
     <Compile Include="BaseClass.cs" />
     <Compile Include="DerivedClass.cs" />
     <Compile Include="DependencyResolverShould.cs" />
+    <Compile Include="Expectations.cs" />
     <Compile Include="IInterface.cs" />
     <Compile Include="IMultiParameterInterface.cs" />
     <Compile Include="INonContravariantInterface.cs" />
