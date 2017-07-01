@@ -1,4 +1,5 @@
 ﻿using JetBrains.Annotations;
+using System;
 
 namespace ATZ.DependencyInjection.NinjectKernel.Net45
 {
@@ -10,6 +11,11 @@ namespace ATZ.DependencyInjection.NinjectKernel.Net45
         public NinjectBindingToSyntax([NotNull] Ninject.Syntax.IBindingToSyntax<T> bindingToSyntax)
         {
             BindingToSyntax = bindingToSyntax;
+        }
+
+        public IBindingWhenInNamedWithOrOnSyntax<T> To(Type implementation)
+        {
+            return new NinjectBindingWhenInNamedWithOrOnSyntax<T>(BindingToSyntax.To(implementation));
         }
 
         public IBindingWhenInNamedWithOrOnSyntax<TImplementation> To<TImplementation>() where TImplementation : T
