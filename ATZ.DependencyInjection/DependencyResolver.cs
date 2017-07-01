@@ -21,7 +21,7 @@ namespace ATZ.DependencyInjection
 
         static DependencyResolver()
         {
-            Instance = new StandardKernel();
+            //Instance = new StandardKernel();
         }
 
         private static void CacheResolutionIfNewlyResolved([NotNull] IKernel kernel, [NotNull] Type interfaceType,
