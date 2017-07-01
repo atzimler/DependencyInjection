@@ -37,7 +37,12 @@ public class NinjectStandardKernel : IKernel
         Kernel.AddBinding(new NBinding(type, ninjectBindingConfiguration.BindingConfiguration));
     }
 
-    public ATZ.DependencyInjection.IBindingToSyntax<T> Bind<T>()
+    public IBindingToSyntax<object> Bind(params Type[] services)
+    {
+        return new NinjectBindingToSyntax<object>(Kernel.Bind(services));
+    }
+
+    public IBindingToSyntax<T> Bind<T>()
     {
         return new NinjectBindingToSyntax<T>(Kernel.Bind<T>());
     }

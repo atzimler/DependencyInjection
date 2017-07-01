@@ -14,6 +14,11 @@ namespace ATZ.DependencyInjection
         {
         }
 
+        public IBindingToSyntax<object> Bind(params Type[] services)
+        {
+            return new NullBindingToSyntax<object>();
+        }
+
         public IBindingToSyntax<T> Bind<T>()
         {
             return new NullBindingToSyntax<T>();

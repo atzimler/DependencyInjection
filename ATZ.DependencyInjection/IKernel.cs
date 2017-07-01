@@ -9,6 +9,9 @@ namespace ATZ.DependencyInjection
         void AddBinding([NotNull] Type type, [NotNull] IBindingConfiguration bindingConfiguration);
 
         [NotNull]
+        IBindingToSyntax<object> Bind([NotNull] params Type[] services);
+
+        [NotNull]
         IBindingToSyntax<T> Bind<T>();
 
         object Get([NotNull] Type type);
