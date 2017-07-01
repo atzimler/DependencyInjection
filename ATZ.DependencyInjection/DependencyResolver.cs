@@ -1,7 +1,5 @@
 ﻿using ATZ.Reflection;
 using JetBrains.Annotations;
-using Ninject;
-using Ninject.Planning.Bindings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +17,11 @@ namespace ATZ.DependencyInjection
         [NotNull]
         public static IKernel Instance { get; private set; }
 
+        static DependencyResolver()
+        {
+            Instance = new NullKernel();
+        }
+
         private static void CacheResolutionIfNewlyResolved([NotNull] IKernel kernel, [NotNull] Type interfaceType,
             Type interfaceArgument, Type templateArgument, [NotNull] IEnumerable<IBinding> bindings)
         {
@@ -32,7 +35,7 @@ namespace ATZ.DependencyInjection
             {
                 if (binding != null)
                 {
-                    kernel.AddBinding(new Binding(interfaceType, binding.BindingConfiguration));
+                    kernel.AddBinding(interfaceType, binding.BindingConfiguration);
                 }
             }
         }
@@ -82,9 +85,9 @@ namespace ATZ.DependencyInjection
         /// </summary>
         public static void Initialize([NotNull] IKernel kernel)
         {
-            //Instance.Dispose();
+            var disposable = Instance as IDisposable;
+            disposable?.Dispose();
 
-            //Instance = new StandardKernel();
             Instance = kernel;
         }
 

@@ -1,7 +1,7 @@
-﻿using Ninject;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System;
 using System.Linq;
+
 
 namespace ATZ.DependencyInjection.Tests
 {
@@ -11,7 +11,7 @@ namespace ATZ.DependencyInjection.Tests
         [SetUp]
         public void SetUp()
         {
-            DependencyResolver.Initialize(new StandardKernel());
+            DependencyResolver.Initialize(new NinjectStandardKernel());
         }
 
         [Test]
@@ -24,7 +24,7 @@ namespace ATZ.DependencyInjection.Tests
         public void ProperlyInitialize()
         {
             var kernel = DependencyResolver.Instance;
-            DependencyResolver.Initialize(new StandardKernel());
+            DependencyResolver.Initialize(new NinjectStandardKernel());
             Assert.AreNotSame(kernel, DependencyResolver.Instance);
         }
 
@@ -33,14 +33,14 @@ namespace ATZ.DependencyInjection.Tests
         {
             var classInterface = new Template<BaseClass>();
             DependencyResolver.Instance.Bind<IInterface<BaseClass>>().ToConstant(classInterface);
-            Assert.Throws<ActivationException>(() => DependencyResolver.Instance.Get<IInterface<DerivedClass>>());
+            Assert.Throws<Ninject.ActivationException>(() => DependencyResolver.Instance.Get<IInterface<DerivedClass>>());
         }
 
         [Test]
         public void ContainNinjectStyleErrorMessageWhenThrowingActivationException()
         {
             var ex =
-                Assert.Throws<ActivationException>(() => DependencyResolver.Instance.Get<IInterface<DerivedClass>>());
+                Assert.Throws<Ninject.ActivationException>(() => DependencyResolver.Instance.Get<IInterface<DerivedClass>>());
 
             Assert.IsNotNull(ex);
             Assert.AreEqual(@"Error activating IInterface{DerivedClass}

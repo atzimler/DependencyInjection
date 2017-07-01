@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATZ.DependencyInjection.Sys
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATZ.DependencyInjection", "ATZ.DependencyInjection\ATZ.DependencyInjection.csproj", "{3B648593-1298-4287-8AC5-77D627327985}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATZ.DependencyInjection.NinjectKernel.Net45", "ATZ.DependencyInjection.NinjectKernel.Net45\ATZ.DependencyInjection.NinjectKernel.Net45.csproj", "{5E5186D5-7354-4932-A568-401A64F0594E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{3B648593-1298-4287-8AC5-77D627327985}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B648593-1298-4287-8AC5-77D627327985}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B648593-1298-4287-8AC5-77D627327985}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E5186D5-7354-4932-A568-401A64F0594E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E5186D5-7354-4932-A568-401A64F0594E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E5186D5-7354-4932-A568-401A64F0594E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E5186D5-7354-4932-A568-401A64F0594E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

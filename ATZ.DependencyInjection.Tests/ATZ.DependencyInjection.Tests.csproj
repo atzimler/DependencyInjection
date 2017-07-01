@@ -34,9 +34,8 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Portable.Ninject.3.3.1\lib\net40-client\Ninject.dll</HintPath>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="nunit.core, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.core.dll</HintPath>
@@ -89,6 +88,10 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ATZ.DependencyInjection.NinjectKernel.Net45\ATZ.DependencyInjection.NinjectKernel.Net45.csproj">
+      <Project>{5E5186D5-7354-4932-A568-401A64F0594E}</Project>
+      <Name>ATZ.DependencyInjection.NinjectKernel.Net45</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ATZ.DependencyInjection\ATZ.DependencyInjection.csproj">
       <Project>{3b648593-1298-4287-8ac5-77d627327985}</Project>
       <Name>ATZ.DependencyInjection</Name>

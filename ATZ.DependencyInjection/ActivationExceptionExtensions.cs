@@ -1,6 +1,5 @@
 ﻿using ATZ.Reflection;
 using JetBrains.Annotations;
-using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Text;
