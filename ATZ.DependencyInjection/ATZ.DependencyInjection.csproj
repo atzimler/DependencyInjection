@@ -40,6 +40,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyVersion.cs">
+      <Link>AssemblyVersion.cs</Link>
+    </Compile>
     <Compile Include="ActivationException.cs" />
     <Compile Include="ActivationExceptionExtensions.cs" />
     <Compile Include="DependencyResolver.cs" />
