@@ -93,19 +93,19 @@ namespace ATZ.DependencyInjection
         }
 
         /// <summary>
-        /// Get an interface with the specified interface type for the interface argument type. If the interface contains contravariant type
-        /// and no specific interface binding is registered then try to apply contravariancy to locate the interface requested.
+        /// Get an interface with the specified interface type for the interface argument type. If the interface contains contra-variant type
+        /// and no specific interface binding is registered then try to apply contra-variance to locate the interface requested.
         /// </summary>
         /// <param name="kernel">The kernel instance used to resolve the interface type.</param>
         /// <param name="interfaceType">The requested interface type.</param>
-        /// <param name="interfaceArgument">The type to use as the parameter of the interface. If the parameter in the interface is contravariant and no
-        /// exact match can be found, the algorithms try to apply contravariancy to find proper interface type binding. If this resolution leads to
+        /// <param name="interfaceArgument">The type to use as the parameter of the interface. If the parameter in the interface is contra-variant and no
+        /// exact match can be found, the algorithms try to apply contra-variance to find proper interface type binding. If this resolution leads to
         /// success, the resolution is placed into the kernel for optimizing future response times.</param>
         /// <returns>The result of the type resolution.</returns>
         /// <exception cref="ArgumentNullException">Either kernel or interfaceType or interfaceArgument parameter is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The interfaceType has more than one generic parameter or is non-generic. Because contravariancy resolution
+        /// <exception cref="ArgumentOutOfRangeException">The interfaceType has more than one generic parameter or is non-generic. Because contra-variant resolution
         /// complicates the situation if more than one parameter is used on the interface, it is currently not supported.</exception>
-        /// <exception cref="ActivationException">The request cannot be fulfilled even when trying to apply contravariance.</exception>
+        /// <exception cref="ActivationException">The request cannot be fulfilled even when trying to apply contra-variance.</exception>
         /// <remarks>This is the implementation of the GetInterface without type safety on the return value to allow debugging of binding problems.</remarks>
         public static object GetInterface(this IKernel kernel, Type interfaceType, Type interfaceArgument)
         {
@@ -132,21 +132,21 @@ At the moment, multiple generic parameters are not supported by this method.");
         }
 
         /// <summary>
-        /// Get an interface with the specified interface type for the interface argument type. If the interface contains contravariant type
-        /// and no specific interface binding is registered then try to apply contravariancy to locate the interface requested.
+        /// Get an interface with the specified interface type for the interface argument type. If the interface contains contra-variant type
+        /// and no specific interface binding is registered then try to apply contra-variance to locate the interface requested.
         /// </summary>
         /// <param name="kernel">The kernel instance used to resolve the interface type.</param>
         /// <param name="interfaceType">The requested interface type.</param>
-        /// <param name="interfaceArgument">The type to use as the parameter of the interface. If the parameter in the interface is contravariant and no
-        /// exact match can be found, the algorithms try to apply contravariancy to find proper interface type binding. If this resolution leads to
+        /// <param name="interfaceArgument">The type to use as the parameter of the interface. If the parameter in the interface is contra-variant and no
+        /// exact match can be found, the algorithms try to apply contra-variance to find proper interface type binding. If this resolution leads to
         /// success, the resolution is placed into the kernel for optimizing future response times.</param>
         /// <returns>The result of the type resolution.</returns>
         /// <exception cref="ArgumentNullException">interfaceType is null</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The interfaceType has more than one generic parameter or is non-generic. Because contravariancy resolution
+        /// <exception cref="ArgumentOutOfRangeException">The interfaceType has more than one generic parameter or is non-generic. Because contra-variant resolution
         /// complicates the situation if more than one parameter is used on the interface, it is currently not supported.</exception>
-        /// <exception cref="ActivationException">The request cannot be fulfilled even when trying to apply contravariance.</exception>
+        /// <exception cref="ActivationException">The request cannot be fulfilled even when trying to apply contra-variance.</exception>
         /// <exception cref="ArgumentException">The interface parameter is non-generic.</exception>
-        /// <remarks>Uses internally the non-typesafe version of GetInterface and returns the values in a type safe manner. When not debugging binding issues, this version of
+        /// <remarks>Uses internally the non type-safe version of GetInterface and returns the values in a type safe manner. When not debugging binding issues, this version of
         /// the method should be used as best practice.</remarks>
         public static T GetInterface<T>(this IKernel kernel, Type interfaceType, Type interfaceArgument)
             where T : class
