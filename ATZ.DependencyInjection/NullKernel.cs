@@ -38,5 +38,13 @@ namespace ATZ.DependencyInjection
         {
             return default(T);
         }
+
+        public void Unbind<T>()
+        {
+        }
+
+        public void Unbind(Type service)
+        {
+        }
     }
 }

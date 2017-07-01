@@ -61,5 +61,15 @@ public class NinjectStandardKernel : IKernel
     {
         return Kernel.GetBindings(type).Select(b => new NinjectBinding(b));
     }
+
+    public void Unbind<T>()
+    {
+        Kernel.Unbind<T>();
+    }
+
+    public void Unbind(Type service)
+    {
+        Kernel.Unbind(service);
+    }
 }
 

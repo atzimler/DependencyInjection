@@ -17,5 +17,8 @@ namespace ATZ.DependencyInjection
         object Get([NotNull] Type type);
         T Get<T>();
         IEnumerable<IBinding> GetBindings([NotNull] Type type);
+
+        void Unbind<T>();
+        void Unbind([NotNull] Type service);
     }
 }
