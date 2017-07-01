@@ -108,14 +108,14 @@ Suggestions:
 
             Assert.IsNotNull(ex);
             Assert.AreEqual(@"Error activating IInterface{in DerivedClass}
-No matching contravariant bindings are available, and the type is not self-bindable.
+No matching contra-variant bindings are available, and the type is not self-bindable.
 Activation path:
   1) Looking for bindings of IInterface{in Object}, found none.
   2) Looking for bindings of IInterface{in BaseClass}, found none.
   3) Request for IInterface{in DerivedClass}, no bindings found.
 
 Suggestions:
-  1) Ensure that you have defined a contravariant binding for IInterface with type parameter of DerivedClass or one of its base class.
+  1) Ensure that you have defined a contra-variant binding for IInterface with type parameter of DerivedClass or one of its base class.
 ", ex.Message);
         }
 
@@ -139,12 +139,12 @@ Suggestions:
 
             Assert.IsNotNull(ex);
             Assert.AreEqual(@"Error activating INonContravariantInterface{BaseClass}
-No matching contravariant bindings are available, and the type is not self-bindable.
+No matching contra-variant bindings are available, and the type is not self-bindable.
 Activation path:
   1) Request for INonContravariantInterface{BaseClass}, no bindings found.
 
 Suggestions:
-  1) Ensure that you have defined a contravariant binding for INonContravariantInterface with type parameter of BaseClass or one of its base class.
+  1) Ensure that you have defined a contra-variant binding for INonContravariantInterface with type parameter of BaseClass or one of its base class.
 ", ex.Message);
         }
 

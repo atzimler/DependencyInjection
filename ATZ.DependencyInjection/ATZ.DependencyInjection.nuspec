@@ -12,10 +12,13 @@
     <licenseUrl>https://raw.githubusercontent.com/atzimler/DependencyInjection/master/LICENSE.txt</licenseUrl>
     <description>DependencyResolver static class for holding the IKernel instance of Ninject and providing additional useful features.</description>
     <dependencies>
-      <dependency id="ATZ.Reflection" version="[2.2,3)" />
+      <dependency id="ATZ.Reflection" version="[3,4)" />
     </dependencies>
     
     <releaseNotes>
+3.0.0:
+- PCL 259.
+      
 2.2.0:
 - Introducing ATZ.DependencyInjection.System.Windows.
 - Adding ATZ.DependencyInjection.System.Windows.IMessageBox
@@ -27,7 +30,7 @@
 - Fixing problem with installation of the ATZ.DependencyInjection.System module.
       
 2.0.0:
-- For when trying to get contravariant interface for a non-generic interface, now ArgumentOutOfRange exception is shown instead of ArgumentException.
+- For when trying to get contra-variant interface for a non-generic interface, now ArgumentOutOfRange exception is shown instead of ArgumentException.
 - Eliminating possibilities for null reference exceptions and adding annotations for ReSharper.
 
 1.3.4:
@@ -69,7 +72,6 @@
   </metadata>
 
   <files>
-    <file src="bin\DebugNET45\ATZ.DependencyInjection*.*" target="lib\net45" />
-    <file src="bin\DebugNET452\ATZ.DependencyInjection*.*" target="lib\net452" />
+    <file src="bin\Debug\ATZ.DependencyInjection*.*" target="lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20" />
   </files>
 </package>

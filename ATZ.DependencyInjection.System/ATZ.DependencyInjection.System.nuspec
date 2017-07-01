@@ -12,11 +12,14 @@
     <licenseUrl>https://raw.githubusercontent.com/atzimler/DependencyInjection/master/LICENSE.txt</licenseUrl>
     <description>ATZ.DependencyResolver extension package for providing bindings to System static classes.</description>
     <dependencies>
-      <dependency id="ATZ.Reflection" version="[2.2,3)" />
-      <dependency id="ATZ.DependencyInjection" version="[2.0,3)" />
+      <dependency id="ATZ.Reflection" version="[3,4)" />
+      <dependency id="ATZ.DependencyInjection" version="[3,4)" />
     </dependencies>
     
     <releaseNotes>
+3.0.0:
+- Depending on PCL 259 ATZ.DependencyInjection.
+      
 2.1.0:
 - Retaining JetBrains.Annotations symbols on the API.
       

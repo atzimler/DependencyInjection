@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">DebugNET452</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C9442B98-6077-4066-A102-74E37110433A}</ProjectGuid>
+    <ProjectGuid>{C9B6752A-9521-4F18-A315-70B4FE8E8BB6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ATZ.DependencyInjection.System.Windows</RootNamespace>
-    <AssemblyName>ATZ.DependencyInjection.System.Windows</AssemblyName>
+    <RootNamespace>ATZ.DependencyInjection</RootNamespace>
+    <AssemblyName>ATZ.DependencyInjection</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,7 +20,7 @@
     <DefineConstants>TRACE;DEBUG;JETBRAINS_ANNOTATIONS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\DebugNET452\ATZ.DependencyInjection.System.Windows.XML</DocumentationFile>
+    <DocumentationFile>bin\DebugNET452\ATZ.DependencyInjection.XML</DocumentationFile>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -35,7 +35,7 @@
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\DebugNET45\</OutputPath>
     <DefineConstants>TRACE;DEBUG;JETBRAINS_ANNOTATIONS</DefineConstants>
-    <DocumentationFile>bin\DebugNET45\ATZ.DependencyInjection.System.Windows.XML</DocumentationFile>
+    <DocumentationFile>bin\DebugNET45\ATZ.DependencyInjection.XML</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
@@ -43,14 +43,22 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="JetBrains.Annotations, Version=10.4.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.Annotations.10.4.0\lib\net\JetBrains.Annotations.dll</HintPath>
+    <Reference Include="ATZ.Reflection, Version=2.2.0.58, Culture=neutral, processorArchitecture=MSIL" Condition="'$(TargetFrameworkVersion)' == 'v4.5.2'">
+      <HintPath>..\packages\ATZ.Reflection.2.2.0.58\lib\net452\ATZ.Reflection.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ATZ.Reflection, Version=2.2.0.58, Culture=neutral, processorArchitecture=MSIL" Condition="'$(TargetFrameworkVersion)' == 'v4.5'">
+      <HintPath>..\packages\ATZ.Reflection.2.2.0.58\lib\net45\ATZ.Reflection.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="JetBrains.Annotations, Version=10.2.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.10.2.1\lib\net\JetBrains.Annotations.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -59,26 +67,27 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyVersion.cs">
       <Link>AssemblyVersion.cs</Link>
     </Compile>
-    <Compile Include="Bindings.cs" />
-    <Compile Include="IMessageBox.cs" />
+    <Compile Include="ActivationExceptionExtensions.cs" />
+    <Compile Include="DependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SystemWindowsMessageBox.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ATZ.DependencyInjection.System.Windows.nuspec" />
+    <None Include="ATZ.DependencyInjection.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ATZ.DependencyInjection\ATZ.DependencyInjection.csproj">
-      <Project>{3b648593-1298-4287-8ac5-77d627327985}</Project>
-      <Name>ATZ.DependencyInjection</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
 </Project>

@@ -66,16 +66,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ATZ.DependencyInjection\ATZ.DependencyInjection.csproj">
-      <Project>{C9B6752A-9521-4F18-A315-70B4FE8E8BB6}</Project>
-      <Name>ATZ.DependencyInjection</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="ATZ.DependencyInjection.System.nuspec">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ATZ.DependencyInjection\ATZ.DependencyInjection.csproj">
+      <Project>{3b648593-1298-4287-8ac5-77d627327985}</Project>
+      <Name>ATZ.DependencyInjection</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

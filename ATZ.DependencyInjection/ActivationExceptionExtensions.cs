@@ -29,11 +29,11 @@ namespace ATZ.DependencyInjection
         internal static ActivationException Create([NotNull] Type interfaceType, [NotNull] Type interfaceArgument, [NotNull] Stack<Type> activation)
         {
             return new ActivationException($@"Error activating {interfaceType.ParameterizedGenericName(interfaceArgument)}
-No matching contravariant bindings are available, and the type is not self-bindable.
+No matching contra-variant bindings are available, and the type is not self-bindable.
 Activation path:
 {GetActivationPath(interfaceType, activation)}
 Suggestions:
-  1) Ensure that you have defined a contravariant binding for {interfaceType.NonGenericName()} with type parameter of {interfaceArgument.Name} or one of its base class.
+  1) Ensure that you have defined a contra-variant binding for {interfaceType.NonGenericName()} with type parameter of {interfaceArgument.Name} or one of its base class.
 ");
 
         }

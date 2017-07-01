@@ -2,6 +2,7 @@
 using JetBrains.Annotations;
 using Ninject;
 using Ninject.Planning.Bindings;
+using Ninject.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,24 @@ namespace ATZ.DependencyInjection
         static DependencyResolver()
         {
             Instance = new StandardKernel();
+        }
+
+        private static void CacheResolutionIfNewlyResolved([NotNull] IBindingRoot kernel, [NotNull] Type interfaceType,
+            Type interfaceArgument, Type templateArgument, [NotNull] IEnumerable<IBinding> bindings)
+        {
+            if (templateArgument == interfaceArgument)
+            {
+                return;
+            }
+
+            // ReSharper disable once PossibleNullReferenceException => Does not return null according to MSDN documentation.
+            foreach (var binding in bindings.ToList())
+            {
+                if (binding != null)
+                {
+                    kernel.AddBinding(new Binding(interfaceType, binding.BindingConfiguration));
+                }
+            }
         }
 
         private static bool IsContravariantTemplate([NotNull] Type interfaceType)
@@ -53,24 +72,12 @@ namespace ATZ.DependencyInjection
                 // and bindings.ToList() will enumerate only it, when registration of the newly found bindings should occurs. => no multiple enumeration of sequence.
                 if (bindings.Any())
                 {
-                    if (templateArgument != interfaceArgument)
-                    {
-                        bindings
-                            .ToList()
-                            .ForEach(
-                                b =>
-                                {
-                                    if (b != null)
-                                    {
-                                        kernel.AddBinding(new Binding(interfaceType, b.BindingConfiguration));
-                                    }
-                                });
-                    }
+                    CacheResolutionIfNewlyResolved(kernel, interfaceType, interfaceArgument, templateArgument, bindings);
                     return kernel.Get(closedTemplateType);
                 }
                 // ReSharper restore PossibleMultipleEnumeration
 
-                templateArgument = isContravariantTemplate ? templateArgument.BaseType : null;
+                templateArgument = isContravariantTemplate ? templateArgument.IntrospectionBaseType() : null;
             }
 
             throw ActivationExceptionExtensions.Create(interfaceType, interfaceArgument, activation);
