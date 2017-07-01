@@ -28,7 +28,6 @@
   </metadata>
 
   <files>
-    <file src="bin\DebugNET45\ATZ.DependencyInjection.System.Windows*.*" target="lib\net45" />
-    <file src="bin\DebugNET452\ATZ.DependencyInjection.System.Windows*.*" target="lib\net452" />
+    <file src="bin\Debug\ATZ.DependencyInjection.System.Windows*.*" target="lib\net45" />
   </files>
 </package>
