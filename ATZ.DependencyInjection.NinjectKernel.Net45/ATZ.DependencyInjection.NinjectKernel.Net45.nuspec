@@ -13,6 +13,7 @@
     <description>ATZ.DependencyResolver.NinjectKernel.Net45 extension package for providing a Kernel implementation based on Ninject targeting .NET Framework 4.5.</description>
     <dependencies>
       <dependency id="ATZ.DependencyInjection" version="[3,4)" />
+      <dependency id="Ninject" version="[3.2,4)" />
     </dependencies>
 
     <releaseNotes>
